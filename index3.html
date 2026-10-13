@@ -1,0 +1,3083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unico — Luxury Store | Timeless Style. Unforgettable Presence.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F9FA;
+      --bg-surface: #F3F4F6;
+      --text-charcoal: #111827;
+      --text-dark: #374151;
+      --text-muted: #6B7280;
+      --text-subtle: #9CA3AF;
+      --border-grey: #E5E7EB;
+      --border-dark: #111827;
+      --gold-accent: #C5A880;
+      --gold-light: #F4EFEA;
+      --green-status: #059669;
+      --green-bg: #ECFDF5;
+      --red-status: #DC2626;
+      --red-bg: #FEF2F2;
+      --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-charcoal);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: var(--font-body);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: none;
+      transition: var(--transition-smooth);
+    }
+
+    input, select, textarea {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-charcoal);
+      background: var(--bg-primary);
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      padding: 10px 14px;
+      width: 100%;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--text-charcoal);
+      box-shadow: 0 0 0 1px var(--text-charcoal);
+    }
+
+    /* Ambient Floating Luxury Background Words */
+    .floating-words-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .floating-word {
+      position: absolute;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: rgba(17, 24, 39, 0.035);
+      letter-spacing: 0.2em;
+      white-space: nowrap;
+      animation: floatMotion 16s ease-in-out infinite alternate;
+    }
+
+    .word-1 { top: 8%; left: 4%; font-size: 8rem; animation-duration: 20s; }
+    .word-2 { top: 32%; right: -2%; font-size: 9.5rem; animation-duration: 24s; animation-delay: -4s; }
+    .word-3 { top: 58%; left: 8%; font-size: 8.5rem; animation-duration: 18s; animation-delay: -8s; }
+    .word-4 { bottom: 6%; right: 6%; font-size: 9rem; animation-duration: 22s; animation-delay: -12s; }
+
+    @keyframes floatMotion {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-35px) rotate(1.5deg); }
+    }
+
+    .app-root {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .announcement-bar {
+      background-color: var(--text-charcoal);
+      color: var(--bg-primary);
+      text-align: center;
+      padding: 7px 16px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .header {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-grey);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-charcoal);
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-charcoal);
+      padding: 6px 12px;
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--bg-secondary);
+      color: var(--gold-accent);
+    }
+
+    .cart-badge {
+      background-color: var(--text-charcoal);
+      color: var(--bg-primary);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 10px;
+      margin-left: 2px;
+    }
+
+    .hero {
+      position: relative;
+      height: 520px;
+      background: #111;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.72;
+      transition: transform 12s ease;
+    }
+
+    .hero:hover .hero-img {
+      transform: scale(1.03);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.88) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+      color: var(--bg-primary);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold-accent);
+      color: var(--bg-primary);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 2px;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-desc {
+      max-width: 620px;
+      font-size: 13.5px;
+      color: #E5E7EB;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      background: #27272A;
+      transform: translateY(-1px);
+    }
+
+    .btn-white {
+      background: var(--bg-primary);
+      color: var(--text-charcoal);
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-white:hover {
+      background: #F3F4F6;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: var(--bg-primary);
+      border: 1px solid var(--bg-primary);
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--text-charcoal);
+      border: 1px solid var(--text-charcoal);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-outline-dark:hover {
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+    }
+
+    .btn-gold {
+      background: var(--gold-accent);
+      color: var(--bg-primary);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 26px;
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-gold:hover {
+      background: #b59870;
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      width: 100%;
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-eyebrow {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      letter-spacing: 0.02em;
+    }
+
+    .catalogue-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding: 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 8px 16px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      color: var(--text-charcoal);
+      transition: var(--transition-smooth);
+    }
+
+    .filter-pill.active {
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+      border-color: var(--text-charcoal);
+    }
+
+    .sort-select {
+      width: auto;
+      min-width: 180px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .product-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .product-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      background: var(--bg-secondary);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .product-image-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-image-wrap img {
+      transform: scale(1.05);
+    }
+
+    .badge-top-left {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(17, 24, 39, 0.85);
+      color: var(--bg-primary);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .badge-discount {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--red-status);
+      color: var(--bg-primary);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 3px 6px;
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .quick-add-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: var(--bg-primary);
+      color: var(--text-charcoal);
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      opacity: 0.9;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      z-index: 2;
+      transition: var(--transition-smooth);
+    }
+
+    .quick-add-btn:hover {
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+      border-color: var(--text-charcoal);
+    }
+
+    .product-info {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .rating-stock-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .rating-tag {
+      font-size: 11px;
+      color: var(--gold-accent);
+      font-weight: 600;
+    }
+
+    .stock-tag {
+      font-size: 9.5px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+
+    .stock-tag.in-stock {
+      background: var(--green-bg);
+      color: var(--green-status);
+    }
+
+    .stock-tag.sold-out {
+      background: var(--red-bg);
+      color: var(--red-status);
+    }
+
+    .product-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      margin-bottom: 8px;
+      cursor: pointer;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .current-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+    }
+
+    .original-price {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .card-actions {
+      margin-top: auto;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--bg-primary);
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 2px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: translateY(15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      background: var(--bg-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--text-charcoal);
+      z-index: 10;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      padding: 36px 30px;
+    }
+
+    .gallery-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .main-image-wrap {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .main-image-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumbnails-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+    }
+
+    .thumb-btn {
+      width: 64px;
+      height: 64px;
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      overflow: hidden;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .thumb-btn.active {
+      border: 2px solid var(--text-charcoal);
+    }
+
+    .thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-cat {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .detail-title {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .detail-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .detail-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+    }
+
+    .detail-orig-price {
+      font-size: 16px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .detail-desc {
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.7;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border-grey);
+      padding-bottom: 16px;
+    }
+
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .qty-control {
+      display: inline-flex;
+      border: 1px solid var(--border-grey);
+      background: var(--bg-secondary);
+      border-radius: 2px;
+    }
+
+    .qty-btn {
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .qty-btn:hover {
+      background: var(--border-grey);
+    }
+
+    .qty-display {
+      padding: 6px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .detail-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .whatsapp-btn {
+      background: transparent;
+      color: var(--text-charcoal);
+      border: 1px solid var(--text-charcoal);
+      font-weight: 600;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .whatsapp-btn:hover {
+      background: #25D366;
+      color: white;
+      border-color: #25D366;
+    }
+
+    /* Cart Drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      background: var(--bg-primary);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+      z-index: 1050;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-drawer-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border-grey);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-drawer-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .cart-items-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-item-row {
+      display: flex;
+      gap: 14px;
+      border-bottom: 1px solid var(--border-grey);
+      padding-bottom: 14px;
+    }
+
+    .cart-item-img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .cart-item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cart-item-name {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+    }
+
+    .cart-item-price {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+
+    .cart-drawer-footer {
+      padding: 20px;
+      border-top: 1px solid var(--border-grey);
+      background: var(--bg-secondary);
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .cart-grand-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      margin: 12px 0 16px 0;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-grey);
+    }
+
+    /* Checkout Modal */
+    .checkout-modal {
+      max-width: 860px;
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      padding: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .payment-option-card {
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .payment-option-card.selected {
+      border-color: var(--text-charcoal);
+      background: #FDFDFD;
+      box-shadow: 0 0 0 1px var(--text-charcoal);
+    }
+
+    .payment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .payment-details-box {
+      margin-top: 10px;
+      padding: 12px;
+      background: var(--bg-surface);
+      border-radius: 2px;
+      font-size: 12px;
+    }
+
+    .copy-pill-btn {
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+      font-size: 9.5px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 2px;
+      margin-left: 8px;
+    }
+
+    /* Order Confirmation */
+    .confirmation-view {
+      padding: 40px 24px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .check-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--green-bg);
+      color: var(--green-status);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 16px auto;
+    }
+
+    /* Orders Table */
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    .orders-table th, .orders-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-grey);
+    }
+
+    .orders-table th {
+      background: var(--bg-secondary);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dark);
+    }
+
+    .status-badge {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .status-badge.pending { background: #FEF3C7; color: #92400E; }
+    .status-badge.approved { background: var(--green-bg); color: var(--green-status); }
+    .status-badge.processing { background: #EDE9FE; color: #6D28D9; }
+    .status-badge.shipped { background: #E0F2FE; color: #0369A1; }
+    .status-badge.delivered { background: var(--green-bg); color: #047857; }
+    .status-badge.cancelled { background: var(--red-bg); color: var(--red-status); }
+
+    /* FAQ Accordion */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-grey);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--bg-primary);
+    }
+
+    .faq-question {
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      background: var(--bg-secondary);
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.7;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      padding: 12px 20px 18px 20px;
+      max-height: 250px;
+      border-top: 1px solid var(--border-grey);
+    }
+
+    /* About Section */
+    .about-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-grey);
+      padding: 40px 24px;
+      border-radius: 2px;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+      padding: 50px 20px 24px 20px;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12.5px;
+      color: #D1D5DB;
+    }
+
+    .footer-links li a:hover {
+      color: var(--bg-primary);
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 20px auto 0 auto;
+      font-size: 11.5px;
+      color: #9CA3AF;
+      text-align: center;
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-charcoal);
+      color: var(--bg-primary);
+      padding: 12px 24px;
+      border-radius: 2px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Admin Tab Controls */
+    .admin-tab-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border-grey);
+      margin-bottom: 20px;
+    }
+
+    .admin-tab-btn {
+      padding: 12px 20px;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+    }
+
+    .admin-tab-btn.active {
+      color: var(--text-charcoal);
+      border-color: var(--text-charcoal);
+    }
+
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-grey);
+      padding: 16px;
+      border-radius: 2px;
+    }
+
+    .stat-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      margin: 4px 0;
+    }
+
+    .stat-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 860px) {
+      .detail-grid, .checkout-grid, .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hero-title {
+        font-size: 32px;
+      }
+      .hero {
+        height: 440px;
+      }
+      .catalogue-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-pills {
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Ambient Luxury Watermark Words -->
+  <div class="floating-words-container">
+    <div class="floating-word word-1">TIMELESS</div>
+    <div class="floating-word word-2">ELEGANCE</div>
+    <div class="floating-word word-3">UNICO</div>
+    <div class="floating-word word-4">SIGNATURE</div>
+  </div>
+
+  <div class="app-root">
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+      ✨ Complimentary Nationwide Delivery On Advance Orders | Cash on Delivery in Pakistan
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="brand-logo" onclick="navigateTo('home')">
+          <div class="brand-title">Unico</div>
+          <div class="brand-subtitle">Luxury Store</div>
+        </div>
+
+        <nav class="nav-actions">
+          <button class="nav-btn" onclick="openMeModal()">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            Me
+          </button>
+          <button class="nav-btn" onclick="toggleCartDrawer(true)">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/></svg>
+            My Cart <span class="cart-badge" id="cartCountBadge">0</span>
+          </button>
+          <button class="nav-btn" onclick="openAdminModal()">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            Admin
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="heroSection">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1600&q=80" alt="Unico Luxury Watches and Perfumes" class="hero-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-badge">Pakistan's Premier Luxury Atelier</span>
+        <h1 class="hero-title">Timeless Style.<br>Unforgettable Presence.</h1>
+        <p class="hero-desc">Curating bespoke Swiss-inspired chronographs and rare artisanal fragrances. Designed for distinguished individuals across Pakistan.</p>
+        <div class="hero-buttons">
+          <button class="btn-white" onclick="filterCategory('Watches')">Shop Watches</button>
+          <button class="btn-outline-white" onclick="filterCategory('Perfumes')">Explore Perfumes</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalogue Section -->
+    <section class="container" id="catalogueSection">
+      <div class="section-header">
+        <div class="section-eyebrow">Curated Collection</div>
+        <h2 class="section-title">The Unico Vault</h2>
+      </div>
+
+      <!-- Controls -->
+      <div class="catalogue-controls">
+        <div class="filter-pills">
+          <button class="filter-pill active" onclick="filterCategory('All', this)">All</button>
+          <button class="filter-pill" onclick="filterCategory('Watches', this)">Watches</button>
+          <button class="filter-pill" onclick="filterCategory('Perfumes', this)">Perfumes</button>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search chronographs, notes, perfumes..." oninput="handleSearch()">
+        </div>
+
+        <select class="sort-select" id="sortSelect" onchange="handleSort()">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="newest">Newest Arrivals</option>
+        </select>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="background: var(--bg-secondary); border-top: 1px solid var(--border-grey); border-bottom: 1px solid var(--border-grey); padding: 50px 0;">
+      <div class="container" style="padding-top: 0; padding-bottom: 0;">
+        <div class="section-header" style="text-align: center;">
+          <div class="section-eyebrow">Client Testimonials</div>
+          <h2 class="section-title">Words From Our Patrons</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+          <div style="background: var(--bg-primary); border: 1px solid var(--border-grey); padding: 22px; border-radius: 2px;">
+            <div style="color: var(--gold-accent); margin-bottom: 8px;">★★★★★</div>
+            <p style="font-size: 13px; color: var(--text-dark); margin-bottom: 12px; line-height: 1.6;">"The Royal Oak Chronograph exceeded my highest expectations. The bezel finishing and solid weight feel truly royal. Arrived in Lahore via Cash on Delivery in 48 hours."</p>
+            <div style="font-weight: 700; font-size: 12px; color: var(--text-charcoal);">Muhammad Hamza — Lahore</div>
+          </div>
+          <div style="background: var(--bg-primary); border: 1px solid var(--border-grey); padding: 22px; border-radius: 2px;">
+            <div style="color: var(--gold-accent); margin-bottom: 8px;">★★★★★</div>
+            <p style="font-size: 13px; color: var(--text-dark); margin-bottom: 12px; line-height: 1.6;">"Aurore Eau De Parfum is a masterpiece. The longevity in Karachi humidity is incredible. The WhatsApp support helped me verify stock right away."</p>
+            <div style="font-weight: 700; font-size: 12px; color: var(--text-charcoal);">Syeda Fatima — Karachi</div>
+          </div>
+          <div style="background: var(--bg-primary); border: 1px solid var(--border-grey); padding: 22px; border-radius: 2px;">
+            <div style="color: var(--gold-accent); margin-bottom: 8px;">★★★★★</div>
+            <p style="font-size: 13px; color: var(--text-dark); margin-bottom: 12px; line-height: 1.6;">"Ordered via JazzCash transfer. TID verification was super quick. Packaged in a stunning gift presentation box. 10/10 luxury experience."</p>
+            <div style="font-weight: 700; font-size: 12px; color: var(--text-charcoal);">Usman Tariq — Islamabad</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="container" id="faqSection">
+      <div class="section-header">
+        <div class="section-eyebrow">Customer Care</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            How can I place an order? <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Browse our collection of luxury watches or perfumes, click on any product to view details, then select 'Add to Cart' or 'Buy Now'. Provide your delivery address in Pakistan, choose your payment method, and confirm your order.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Which payment methods are accepted? <span>+</span>
+          </div>
+          <div class="faq-answer">
+            We accept JazzCash (03054272499 - Abdullah), Easypaisa (03054272499 - Asad Nadeem), UBL Bank Transfer (A/C: 0463383104492 - Asad Nadeem), and Cash on Delivery (COD) across Pakistan.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            How does Cash on Delivery (COD) work? <span>+</span>
+          </div>
+          <div class="faq-answer">
+            When you select Cash on Delivery at checkout, a standard shipping fee of Rs. 150 is added. You pay the exact amount in Pakistani Rupees to the delivery rider at your doorstep.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            What are the delivery charges? <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Nationwide delivery is 100% complimentary on all advance payments (JazzCash, Easypaisa, UBL) and orders over Rs. 10,000. Cash on Delivery orders incur a nominal Rs. 150 courier charge.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Can I inquire on WhatsApp before purchasing? <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Yes! Every product has an 'Inquire on WhatsApp' button that directly opens a WhatsApp chat with our boutique concierge at 03054272499 with your chosen item details prefilled.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            How do I check my order status? <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Click on 'Me' in the header anytime. Your complete order history with real-time updates (Pending, Approved, Processing, Shipped, Delivered) is saved locally on your browser.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Unico Section -->
+    <section class="container" id="aboutSection" style="padding-top: 0;">
+      <div class="about-box">
+        <div class="section-eyebrow">The Atelier</div>
+        <h2 class="section-title" style="margin-bottom: 14px;">Timeless Style. Unforgettable Presence.</h2>
+        <p style="font-size: 13.5px; color: var(--text-dark); line-height: 1.8; margin-bottom: 24px;">
+          Unico Luxury Store is a dedicated Pakistani luxury house committed to bringing high-grade precision timepieces and niche fragrance extracts to discerning gentlemen and ladies. Every timepiece is individually inspected and calibrated, and every fragrance is stored in climate-monitored vaults to ensure peak scent performance.
+        </p>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn-primary" onclick="filterCategory('All')">Explore Catalogue</button>
+          <a href="https://wa.me/923054272499?text=Hello%20Unico%20Luxury%20Store%2C%20I%20would%20like%20to%20inquire%20about%20your%20products." target="_blank" class="whatsapp-btn">
+            Inquire on WhatsApp (03054272499)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <div class="brand-title" style="color: var(--bg-primary); margin-bottom: 2px;">Unico</div>
+          <div class="brand-subtitle" style="margin-bottom: 14px;">Luxury Store</div>
+          <p style="font-size: 12.5px; color: #9CA3AF; line-height: 1.6; max-width: 380px;">
+            Exquisite Swiss-inspired horology and artisanal luxury perfumes. Tailored with care for luxury connoisseurs in Pakistan.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" onclick="filterCategory('Watches')">Shop Watches</a></li>
+            <li><a href="javascript:void(0)" onclick="filterCategory('Perfumes')">Shop Perfumes</a></li>
+            <li><a href="javascript:void(0)" onclick="toggleCartDrawer(true)">My Cart</a></li>
+            <li><a href="javascript:void(0)" onclick="openMeModal()">Me / Order History</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Concierge</div>
+          <ul class="footer-links">
+            <li>WhatsApp: 03054272499</li>
+            <li>Hours: Mon - Sat, 10 AM - 10 PM PKT</li>
+            <li>Nationwide Doorstep Delivery</li>
+            <li>Payment: COD, JazzCash, Easypaisa, UBL</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Unico — Luxury Store. All rights reserved. Pakistan.
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Shopping Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">Shopping Bag (<span id="cartDrawerCount">0</span>)</div>
+      <button class="modal-close-btn" onclick="toggleCartDrawer(false)" style="position: static;">✕</button>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-total-row">
+        <span>Bag Subtotal</span>
+        <span id="cartSubtotalText">Rs. 0</span>
+      </div>
+      <div class="cart-total-row">
+        <span>Estimated Delivery</span>
+        <span id="cartShippingText">FREE (over Rs. 10,000)</span>
+      </div>
+      <div class="cart-grand-total">
+        <span>Estimated Total</span>
+        <span id="cartTotalText">Rs. 0</span>
+      </div>
+      <button class="btn-primary" style="width: 100%;" onclick="openCheckoutFromCart()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay" id="productDetailModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeProductDetailModal()">✕</button>
+      <div class="detail-grid" id="productDetailContent">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card checkout-modal">
+      <button class="modal-close-btn" onclick="closeCheckoutModal()">✕</button>
+      <div style="padding: 24px 30px; border-bottom: 1px solid var(--border-grey);">
+        <h3 style="font-family: var(--font-heading); font-size: 22px;">Secure Checkout</h3>
+        <p style="font-size: 12px; color: var(--text-muted);">Please provide your Pakistani delivery and payment details.</p>
+      </div>
+
+      <div class="checkout-grid">
+        <!-- Left: Form -->
+        <div>
+          <div class="section-eyebrow" style="margin-bottom: 10px;">1. Delivery Details</div>
+          
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="custName" placeholder="e.g. Muhammad Abdullah" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">WhatsApp Number *</label>
+              <input type="tel" id="custWhatsapp" placeholder="03051234567" required>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Alt Contact (Optional)</label>
+              <input type="tel" id="custAltPhone" placeholder="03001234567">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Province *</label>
+              <select id="custProvince">
+                <option value="Punjab">Punjab</option>
+                <option value="Sindh">Sindh</option>
+                <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+                <option value="Balochistan">Balochistan</option>
+                <option value="Islamabad Capital Territory">Islamabad Capital Territory</option>
+                <option value="Azad Jammu & Kashmir">Azad Jammu & Kashmir</option>
+                <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">City *</label>
+              <input type="text" id="custCity" placeholder="e.g. Lahore" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Complete Street Address *</label>
+            <textarea id="custAddress" rows="2" placeholder="House/Apartment #, Street name, Block/Sector" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Famous Nearby Landmark (Optional)</label>
+            <input type="text" id="custLandmark" placeholder="e.g. Near Giga Mall / Allied Bank">
+          </div>
+
+          <div class="section-eyebrow" style="margin: 20px 0 10px 0;">2. Pakistani Payment Method</div>
+
+          <!-- Payment Options -->
+          <div class="payment-option-card selected" id="optCOD" onclick="selectPaymentMethod('Cash on Delivery')">
+            <div class="payment-header">
+              <input type="radio" name="paymentMethod" checked>
+              <strong>Cash on Delivery (COD)</strong>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+              Pay in cash upon arrival. Courier fee of Rs. 150 applies.
+            </div>
+          </div>
+
+          <div class="payment-option-card" id="optJazz" onclick="selectPaymentMethod('JazzCash')">
+            <div class="payment-header">
+              <input type="radio" name="paymentMethod">
+              <strong>JazzCash (Free Delivery)</strong>
+            </div>
+            <div class="payment-details-box" id="detailsJazz" style="display: none;">
+              <div>Account Name: <strong>Abdullah</strong></div>
+              <div style="display: flex; align-items: center; margin-top: 4px;">
+                <span>Account Number: <strong>03054272499</strong></span>
+                <button type="button" class="copy-pill-btn" onclick="copyText('03054272499', 'JazzCash Account copied!')">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-option-card" id="optEasy" onclick="selectPaymentMethod('Easypaisa')">
+            <div class="payment-header">
+              <input type="radio" name="paymentMethod">
+              <strong>Easypaisa (Free Delivery)</strong>
+            </div>
+            <div class="payment-details-box" id="detailsEasy" style="display: none;">
+              <div>Account Name: <strong>Asad Nadeem</strong></div>
+              <div style="display: flex; align-items: center; margin-top: 4px;">
+                <span>Account Number: <strong>03054272499</strong></span>
+                <button type="button" class="copy-pill-btn" onclick="copyText('03054272499', 'Easypaisa Account copied!')">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-option-card" id="optUBL" onclick="selectPaymentMethod('UBL Bank Transfer')">
+            <div class="payment-header">
+              <input type="radio" name="paymentMethod">
+              <strong>UBL Bank Transfer (Free Delivery)</strong>
+            </div>
+            <div class="payment-details-box" id="detailsUBL" style="display: none;">
+              <div>Bank: <strong>United Bank Limited (UBL)</strong></div>
+              <div>Account Name: <strong>Asad Nadeem</strong></div>
+              <div style="display: flex; align-items: center; margin-top: 4px;">
+                <span>A/C: <strong>0463383104492</strong></span>
+                <button type="button" class="copy-pill-btn" onclick="copyText('0463383104492', 'UBL A/C copied!')">Copy A/C</button>
+              </div>
+              <div style="display: flex; align-items: center; margin-top: 4px;">
+                <span style="font-size: 11px;">IBAN: <strong>PK77UNIL0109000383104492</strong></span>
+                <button type="button" class="copy-pill-btn" onclick="copyText('PK77UNIL0109000383104492', 'IBAN copied!')">Copy IBAN</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" id="paymentRefGroup" style="display: none; margin-top: 14px;">
+            <label class="form-label">Payment Reference / TID / Payer Account *</label>
+            <input type="text" id="custPaymentRef" placeholder="e.g. TID #12345678 or sender name">
+          </div>
+
+          <div class="form-group" id="paymentProofGroup" style="display: none;">
+            <label class="form-label">Payment Screenshot / Receipt (Optional)</label>
+            <input type="file" id="custPaymentProof" accept="image/*" onchange="handleProofImage(this)">
+            <div id="proofPreview" style="margin-top: 8px; display: none;">
+              <img id="proofPreviewImg" src="" style="width: 80px; height: 80px; object-fit: cover; border: 1px solid var(--border-grey);">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Order Summary -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-grey); padding: 20px; border-radius: 2px; display: flex; flex-direction: column;">
+          <div class="section-eyebrow" style="margin-bottom: 12px;">3. Order Summary</div>
+          
+          <div id="checkoutItemsList" style="flex: 1; max-height: 280px; overflow-y: auto; margin-bottom: 16px;">
+            <!-- Injected via JavaScript -->
+          </div>
+
+          <div style="border-top: 1px solid var(--border-grey); padding-top: 12px;">
+            <div class="cart-total-row">
+              <span>Items Subtotal</span>
+              <span id="checkoutSubtotal">Rs. 0</span>
+            </div>
+            <div class="cart-total-row">
+              <span>Delivery Fee</span>
+              <span id="checkoutDelivery">Rs. 150</span>
+            </div>
+            <div class="cart-grand-total">
+              <span>Final Total</span>
+              <span id="checkoutGrandTotal">Rs. 0</span>
+            </div>
+
+            <button class="btn-primary" style="width: 100%;" id="placeOrderBtn" onclick="submitOrder()">Place Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Confirmation Modal -->
+  <div class="modal-overlay" id="orderConfirmModal">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="confirmation-view" id="orderConfirmView">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Me / Customer Order History Modal -->
+  <div class="modal-overlay" id="meModal">
+    <div class="modal-card" style="max-width: 780px;">
+      <button class="modal-close-btn" onclick="closeMeModal()">✕</button>
+      <div style="padding: 24px 30px; border-bottom: 1px solid var(--border-grey);">
+        <h3 style="font-family: var(--font-heading); font-size: 22px;">Me / Order History</h3>
+        <p style="font-size: 12px; color: var(--text-muted);">View your previously placed luxury orders and dispatch tracking.</p>
+      </div>
+
+      <div style="padding: 24px 30px;" id="meOrdersContainer">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Portal Modal -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-card" style="max-width: 960px;">
+      <button class="modal-close-btn" onclick="closeAdminModal()">✕</button>
+
+      <!-- Admin Login View -->
+      <div id="adminLoginSection" style="padding: 40px 30px; max-width: 440px; margin: 0 auto; text-align: center;">
+        <div class="brand-title" style="font-size: 26px;">Unico</div>
+        <div class="brand-subtitle" style="margin-bottom: 24px;">Administrator Portal</div>
+        
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Username</label>
+          <input type="text" id="adminUser" placeholder="">
+        </div>
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Password</label>
+          <input type="password" id="adminPass" placeholder="">
+        </div>
+        <div id="adminLoginErr" style="color: var(--red-status); font-size: 12px; margin-bottom: 12px; display: none;"></div>
+        
+        <button class="btn-primary" style="width: 100%; margin-top: 8px;" onclick="handleAdminLogin()">Sign In to Dashboard</button>
+      </div>
+
+      <!-- Admin Dashboard View -->
+      <div id="adminDashboardSection" style="display: none; padding: 24px 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-family: var(--font-heading); font-size: 22px;">Admin Management Console</h3>
+            <p style="font-size: 11.5px; color: var(--gold-accent); font-weight: 600;">Unico Luxury Store Atelier</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-outline-dark" onclick="toggleAdminPasswordModal()">Change Password</button>
+            <button class="btn-primary" onclick="adminLogout()" style="padding: 8px 14px;">Logout</button>
+          </div>
+        </div>
+
+        <!-- Admin Tabs -->
+        <div class="admin-tab-nav">
+          <button class="admin-tab-btn active" onclick="switchAdminTab('overview', this)">Overview</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('orders', this)">Orders (<span id="adminOrdersTabCount">0</span>)</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('products', this)">Catalogue (<span id="adminProdTabCount">0</span>)</button>
+        </div>
+
+        <!-- Tab 1: Overview -->
+        <div id="tabOverview">
+          <div class="stat-cards-grid">
+            <div class="stat-card">
+              <div class="stat-lbl">Gross Orders Value</div>
+              <div class="stat-val" id="statGrossSales">Rs. 0</div>
+              <div style="font-size: 11px; color: var(--gold-accent);" id="statOrderCount">0 orders</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-lbl">Pending Verification</div>
+              <div class="stat-val" id="statPendingCount" style="color: #B45309;">0</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Awaiting approval</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-lbl">Delivered Sales</div>
+              <div class="stat-val" id="statDeliveredSales" style="color: var(--green-status);">Rs. 0</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Completed orders</div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-secondary); border: 1px solid var(--border-grey); padding: 16px; border-radius: 2px;">
+            <div class="section-eyebrow" style="margin-bottom: 8px;">Revenue By Payment Method</div>
+            <div id="adminPaymentBreakdown" style="font-size: 12.5px;"></div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Orders Management -->
+        <div id="tabOrders" style="display: none; max-height: 550px; overflow-y: auto;">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Client / City</th>
+                <th>Method / TID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Update</th>
+              </tr>
+            </thead>
+            <tbody id="adminOrdersTableBody">
+              <!-- Injected via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tab 3: Products Management -->
+        <div id="tabProducts" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div class="section-eyebrow">Product Catalogue</div>
+            <button class="btn-primary" onclick="openProductEditModal(null)">+ Add New Product</button>
+          </div>
+          <div id="adminProductsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 480px; overflow-y: auto;">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Add / Edit Product Modal -->
+  <div class="modal-overlay" id="productEditModal" style="z-index: 1100;">
+    <div class="modal-card" style="max-width: 640px;">
+      <button class="modal-close-btn" onclick="closeProductEditModal()">✕</button>
+      <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-grey);">
+        <h3 id="productEditModalTitle" style="font-family: var(--font-heading); font-size: 18px;">Add New Product</h3>
+      </div>
+      <div style="padding: 20px 24px;">
+        <input type="hidden" id="editProdId">
+        <div class="form-group">
+          <label class="form-label">Product Name *</label>
+          <input type="text" id="editProdName" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Category *</label>
+            <select id="editProdCategory">
+              <option value="Watches">Watches</option>
+              <option value="Perfumes">Perfumes</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Stock Units *</label>
+            <input type="number" id="editProdStock" value="10" min="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Price (PKR) *</label>
+            <input type="number" id="editProdPrice" required>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Original Price (PKR)</label>
+            <input type="number" id="editProdOrigPrice">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Product Image URL(s) (separate multiple URLs with commas)</label>
+          <input type="text" id="editProdImages" placeholder="https://... or select files below">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Or Upload Images from Device</label>
+          <input type="file" id="editProdFileInput" multiple accept="image/*" onchange="handleAdminImageUpload(this)">
+        </div>
+        <div id="editImagesPreview" style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;"></div>
+        <div class="form-group">
+          <label class="form-label">Description *</label>
+          <textarea id="editProdDesc" rows="3" required></textarea>
+        </div>
+        <button class="btn-primary" style="width: 100%;" onclick="saveProductFromModal()">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Change Password Modal -->
+  <div class="modal-overlay" id="changePasswordModal" style="z-index: 1200;">
+    <div class="modal-card" style="max-width: 420px;">
+      <button class="modal-close-btn" onclick="toggleAdminPasswordModal(false)">✕</button>
+      <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-grey);">
+        <h3 style="font-family: var(--font-heading); font-size: 18px;">Update Credentials</h3>
+      </div>
+      <div style="padding: 20px 24px;">
+        <div class="form-group">
+          <label class="form-label">Current Password *</label>
+          <input type="password" id="curAdminPass">
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Username (Optional)</label>
+          <input type="text" id="newAdminUser">
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Password *</label>
+          <input type="password" id="newAdminPass">
+        </div>
+        <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="saveAdminCredentials()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Bar -->
+  <div class="toast-msg" id="toastMessage">Product added to bag</div>
+
+  <script>
+    const STORAGE_KEY_PRODUCTS = "unico_products_v1";
+    const STORAGE_KEY_ORDERS = "unico_orders_v1";
+    const STORAGE_KEY_CART = "unico_cart_v1";
+    const STORAGE_KEY_ADMIN = "unico_admin_creds_v1";
+
+    const DEFAULT_PRODUCTS = [
+      {
+        id: "prod_1",
+        name: "Unico Royal Oak Chronograph",
+        category: "Watches",
+        price: 38500,
+        originalPrice: 45000,
+        description: "Hand-finished 316L surgical stainless steel timepiece with octagonal bezel, anti-reflective sapphire crystal, and high-precision mechanical chronograph movement. Water resistant to 100m. Delivered in signature mahogany box.",
+        images: [
+          "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+        ],
+        stock: 12,
+        isAvailable: true,
+        rating: 4.9,
+        reviewsCount: 42,
+        isBestSeller: true,
+        isNewArrival: false
+      },
+      {
+        id: "prod_2",
+        name: "Unico Aurore Eau De Parfum (100ml)",
+        category: "Perfumes",
+        price: 14500,
+        originalPrice: 17000,
+        description: "A captivating olfactory masterpiece opening with radiant Italian bergamot and pink pepper, cascading into a heart of French May rose and golden amber, enveloped in smoky Bourbon vanilla and velvety sandalwood.",
+        images: [
+          "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=800&q=80"
+        ],
+        stock: 25,
+        isAvailable: true,
+        rating: 4.9,
+        reviewsCount: 53,
+        isBestSeller: true,
+        isNewArrival: false
+      },
+      {
+        id: "prod_3",
+        name: "Unico Speedmaster Slate Chrono",
+        category: "Watches",
+        price: 42000,
+        originalPrice: 49000,
+        description: "Engineered for uncompromising presence. Features a brushed slate-grey dial with luminescent indices, ceramic tachymeter bezel, dual sub-dials, and an integrated stainless steel links bracelet with butterfly clasp.",
+        images: [
+          "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"
+        ],
+        stock: 8,
+        isAvailable: true,
+        rating: 5.0,
+        reviewsCount: 19,
+        isBestSeller: false,
+        isNewArrival: true
+      },
+      {
+        id: "prod_4",
+        name: "Unico Noir Intense Extrait (100ml)",
+        category: "Perfumes",
+        price: 16800,
+        originalPrice: 19500,
+        description: "An ultra-concentrated parfum extract radiating dark intrigue. Notes of spiced cardamom, rich saffron, midnight incense, Indonesian patchouli, and rare agarwood (oud). Leaves an unforgettable, lingering presence.",
+        images: [
+          "https://images.unsplash.com/photo-1588405748880-12d1d2259f75?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80"
+        ],
+        stock: 14,
+        isAvailable: true,
+        rating: 5.0,
+        reviewsCount: 38,
+        isBestSeller: false,
+        isNewArrival: true
+      },
+      {
+        id: "prod_5",
+        name: "Unico Vintage Classic Dress Watch",
+        category: "Watches",
+        price: 28000,
+        originalPrice: 32000,
+        description: "Elegance redefined for black-tie tailoring. Ultra-thin 7.8mm profile, champagne sunburst dial, blued dauphine hands, and genuine hand-stitched Italian leather strap.",
+        images: [
+          "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+        ],
+        stock: 6,
+        isAvailable: true,
+        rating: 4.8,
+        reviewsCount: 27,
+        isBestSeller: false,
+        isNewArrival: false
+      },
+      {
+        id: "prod_6",
+        name: "Unico Velvet Oud & Rose (50ml)",
+        category: "Perfumes",
+        price: 12900,
+        originalPrice: 14500,
+        description: "A harmonious marriage of Damask rose petals drenched in warm Cambodian oud and sweet praline. Rich, decadent, and uniquely alluring for grand Pakistani celebrations.",
+        images: [
+          "https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=800&q=80"
+        ],
+        stock: 18,
+        isAvailable: true,
+        rating: 4.8,
+        reviewsCount: 22,
+        isBestSeller: false,
+        isNewArrival: false
+      }
+    ];
+
+    function getProducts() {
+      const stored = localStorage.getItem(STORAGE_KEY_PRODUCTS);
+      if (!stored) {
+        localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(DEFAULT_PRODUCTS));
+        return DEFAULT_PRODUCTS;
+      }
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        return DEFAULT_PRODUCTS;
+      }
+    }
+
+    function saveProducts(prods) {
+      localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(prods));
+    }
+
+    function getCart() {
+      const stored = localStorage.getItem(STORAGE_KEY_CART);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function getOrders() {
+      const stored = localStorage.getItem(STORAGE_KEY_ORDERS);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveOrders(orders) {
+      localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
+    }
+
+    function getAdminCredentials() {
+      const stored = localStorage.getItem(STORAGE_KEY_ADMIN);
+      if (!stored) {
+        const initial = { user: "abdullahasad", pass: "124211212ahad0011" };
+        localStorage.setItem(STORAGE_KEY_ADMIN, JSON.stringify(initial));
+        return initial;
+      }
+      return JSON.parse(stored);
+    }
+
+    let currentCategory = "All";
+    let searchQuery = "";
+    let sortOption = "featured";
+    let activeDetailProduct = null;
+    let buyNowDirectItem = null;
+    let selectedPayment = "Cash on Delivery";
+    let attachedProofBase64 = null;
+
+    function renderProducts() {
+      const grid = document.getElementById("productsGrid");
+      const products = getProducts();
+
+      let filtered = products.filter(p => p.isAvailable);
+
+      if (currentCategory !== "All") {
+        filtered = filtered.filter(p => p.category.toLowerCase() === currentCategory.toLowerCase());
+      }
+
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q)
+        );
+      }
+
+      if (sortOption === "price-asc") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortOption === "price-desc") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortOption === "newest") {
+        filtered.sort((a, b) => (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0));
+      } else {
+        filtered.sort((a, b) => (b.isBestSeller ? 1 : 0) - (a.isBestSeller ? 1 : 0));
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+            <p style="font-family: var(--font-heading); font-size: 20px;">No luxury pieces found</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Try adjusting your search terms or filters.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(product => {
+        const discount = product.originalPrice && product.originalPrice > product.price
+          ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+          : null;
+        const mainImage = product.images && product.images.length > 0 ? product.images[0] : '';
+
+        return `
+          <div class="product-card">
+            <div class="product-image-wrap" onclick="openProductDetailModal('${product.id}')">
+              <span class="badge-top-left">${product.category}</span>
+              ${discount ? `<span class="badge-discount">-${discount}%</span>` : ''}
+              <img src="${mainImage}" alt="${product.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'">
+              <button class="quick-add-btn" title="Add to Bag" onclick="event.stopPropagation(); addToCart('${product.id}', 1)">
+                +
+              </button>
+            </div>
+            <div class="product-info">
+              <div class="rating-stock-row">
+                <span class="rating-tag">★ ${product.rating || '5.0'} (${product.reviewsCount || 20})</span>
+                <span class="stock-tag ${product.stock > 0 ? 'in-stock' : 'sold-out'}">
+                  ${product.stock > 0 ? 'In Stock' : 'Sold Out'}
+                </span>
+              </div>
+              <div class="product-title" onclick="openProductDetailModal('${product.id}')">${product.name}</div>
+              <div class="price-row">
+                <span class="current-price">Rs. ${product.price.toLocaleString()}</span>
+                ${product.originalPrice ? `<span class="original-price">Rs. ${product.originalPrice.toLocaleString()}</span>` : ''}
+              </div>
+              <div class="card-actions">
+                <button class="btn-outline-dark" style="width: 100%;" onclick="openProductDetailModal('${product.id}')">View Product</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterCategory(cat, el) {
+      currentCategory = cat;
+      document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+      if (el) {
+        el.classList.add("active");
+      } else {
+        const pills = document.querySelectorAll(".filter-pill");
+        pills.forEach(p => {
+          if (p.textContent.trim().toLowerCase() === cat.toLowerCase()) p.classList.add("active");
+        });
+      }
+      renderProducts();
+      document.getElementById("catalogueSection").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById("searchInput").value;
+      renderProducts();
+    }
+
+    function handleSort() {
+      sortOption = document.getElementById("sortSelect").value;
+      renderProducts();
+    }
+
+    function openProductDetailModal(id) {
+      const products = getProducts();
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      activeDetailProduct = p;
+
+      const discount = p.originalPrice && p.originalPrice > p.price
+        ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100)
+        : null;
+
+      const images = p.images && p.images.length > 0 ? p.images : ['https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'];
+
+      const content = document.getElementById("productDetailContent");
+      content.innerHTML = `
+        <div class="gallery-container">
+          <div class="main-image-wrap">
+            <img id="detailMainImg" src="${images[0]}" alt="${p.name}">
+          </div>
+          ${images.length > 1 ? `
+            <div class="thumbnails-row">
+              ${images.map((img, idx) => `
+                <div class="thumb-btn ${idx === 0 ? 'active' : ''}" onclick="switchDetailImage('${img}', this)">
+                  <img src="${img}" alt="Thumbnail">
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+
+        <div class="detail-info">
+          <div class="detail-cat">${p.category}</div>
+          <h2 class="detail-title">${p.name}</h2>
+          <div style="font-size: 12px; color: var(--gold-accent); margin-bottom: 12px;">
+            ★ ${p.rating || '5.0'} (${p.reviewsCount || 24} Verified Patron Reviews) • 
+            <span style="color: ${p.stock > 0 ? 'var(--green-status)' : 'var(--red-status)'}; font-weight: 600;">
+              ${p.stock > 0 ? `${p.stock} Units In Stock` : 'Out of Stock'}
+            </span>
+          </div>
+
+          <div class="detail-price-box">
+            <span class="detail-price">Rs. ${p.price.toLocaleString()}</span>
+            ${p.originalPrice ? `<span class="detail-orig-price">Rs. ${p.originalPrice.toLocaleString()}</span>` : ''}
+            ${discount ? `<span style="background: var(--red-status); color: #fff; padding: 2px 6px; font-size: 10px; font-weight: 700;">-${discount}%</span>` : ''}
+          </div>
+
+          <div class="detail-desc">${p.description}</div>
+
+          <div class="qty-selector">
+            <span style="font-size: 12px; font-weight: 600; text-transform: uppercase;">Quantity:</span>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeDetailQty(-1)">−</button>
+              <span class="qty-display" id="detailQtyDisplay">1</span>
+              <button class="qty-btn" onclick="changeDetailQty(1)">+</button>
+            </div>
+          </div>
+
+          <div class="detail-cta-group">
+            <button class="btn-primary" style="padding: 14px;" onclick="addToCartFromDetail()">Add to Bag</button>
+            <button class="btn-gold" style="padding: 14px;" onclick="buyNowFromDetail()">Buy Now (Checkout)</button>
+            <button class="whatsapp-btn" onclick="inquireOnWhatsapp('${p.id}')">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+              Inquire on WhatsApp (03054272499)
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("productDetailModal").classList.add("open");
+    }
+
+    function closeProductDetailModal() {
+      document.getElementById("productDetailModal").classList.remove("open");
+      activeDetailProduct = null;
+    }
+
+    function switchDetailImage(src, btn) {
+      document.getElementById("detailMainImg").src = src;
+      document.querySelectorAll(".thumb-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    let detailQty = 1;
+    function changeDetailQty(delta) {
+      detailQty = Math.max(1, detailQty + delta);
+      document.getElementById("detailQtyDisplay").textContent = detailQty;
+    }
+
+    function addToCartFromDetail() {
+      if (!activeDetailProduct) return;
+      addToCart(activeDetailProduct.id, detailQty);
+      closeProductDetailModal();
+    }
+
+    function buyNowFromDetail() {
+      if (!activeDetailProduct) return;
+      buyNowDirectItem = {
+        product: activeDetailProduct,
+        quantity: detailQty
+      };
+      closeProductDetailModal();
+      openCheckoutModal();
+    }
+
+    function inquireOnWhatsapp(prodId) {
+      const products = getProducts();
+      const p = products.find(x => x.id === prodId) || activeDetailProduct;
+      if (!p) return;
+
+      const qty = document.getElementById("detailQtyDisplay") ? document.getElementById("detailQtyDisplay").textContent : "1";
+      const message = `Hello Unico Luxury Store,\nI am inquiring about the following item:\n\n*Product:* ${p.name}\n*Price:* Rs. ${p.price.toLocaleString()}\n*Selected Quantity:* ${qty}\n\nIs this item available for immediate dispatch in Pakistan?`;
+      const encodedMsg = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/923054272499?text=${encodedMsg}`;
+      window.open(whatsappUrl, "_blank");
+    }
+
+    function addToCart(prodId, qty = 1) {
+      const cart = getCart();
+      const products = getProducts();
+      const prod = products.find(p => p.id === prodId);
+      if (!prod) return;
+
+      const existing = cart.find(item => item.productId === prodId);
+      if (existing) {
+        existing.quantity += qty;
+      } else {
+        cart.push({ productId: prodId, quantity: qty });
+      }
+
+      saveCart(cart);
+      showToast(`Added ${prod.name} to bag`);
+    }
+
+    function updateCartQty(prodId, delta) {
+      let cart = getCart();
+      const item = cart.find(x => x.productId === prodId);
+      if (!item) return;
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        cart = cart.filter(x => x.productId !== prodId);
+      }
+      saveCart(cart);
+      renderCartDrawer();
+    }
+
+    function removeCartItem(prodId) {
+      let cart = getCart();
+      cart = cart.filter(x => x.productId !== prodId);
+      saveCart(cart);
+      renderCartDrawer();
+      showToast("Item removed from bag");
+    }
+
+    function updateCartBadge() {
+      const cart = getCart();
+      const count = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+      document.getElementById("cartCountBadge").textContent = count;
+      document.getElementById("cartDrawerCount").textContent = count;
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById("cartDrawer");
+      if (open) {
+        renderCartDrawer();
+        drawer.classList.add("open");
+      } else {
+        drawer.classList.remove("open");
+      }
+    }
+
+    function renderCartDrawer() {
+      const cart = getCart();
+      const products = getProducts();
+      const listEl = document.getElementById("cartItemsList");
+
+      if (cart.length === 0) {
+        listEl.innerHTML = `
+          <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+            <div style="font-size: 38px; margin-bottom: 10px;">👜</div>
+            <div style="font-family: var(--font-heading); font-size: 18px; color: var(--text-charcoal);">Your Bag is Empty</div>
+            <p style="font-size: 12.5px; margin-top: 6px;">Explore our watches and perfumes to curate your collection.</p>
+          </div>
+        `;
+        document.getElementById("cartSubtotalText").textContent = "Rs. 0";
+        document.getElementById("cartTotalText").textContent = "Rs. 0";
+        return;
+      }
+
+      let subtotal = 0;
+      listEl.innerHTML = cart.map(item => {
+        const prod = products.find(p => p.id === item.productId);
+        if (!prod) return '';
+        const lineTotal = prod.price * item.quantity;
+        subtotal += lineTotal;
+        const img = prod.images && prod.images.length > 0 ? prod.images[0] : '';
+
+        return `
+          <div class="cart-item-row">
+            <img src="${img}" alt="${prod.name}" class="cart-item-img">
+            <div class="cart-item-details">
+              <div>
+                <div class="cart-item-name">${prod.name}</div>
+                <div class="cart-item-price">Rs. ${prod.price.toLocaleString()}</div>
+              </div>
+              <div class="cart-item-controls">
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="updateCartQty('${prod.id}', -1)">−</button>
+                  <span class="qty-display">${item.quantity}</span>
+                  <button class="qty-btn" onclick="updateCartQty('${prod.id}', 1)">+</button>
+                </div>
+                <div style="font-weight: 700; font-size: 13px;">Rs. ${lineTotal.toLocaleString()}</div>
+                <button onclick="removeCartItem('${prod.id}')" style="color: var(--red-status); font-size: 12px;">✕</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById("cartSubtotalText").textContent = `Rs. ${subtotal.toLocaleString()}`;
+      document.getElementById("cartTotalText").textContent = `Rs. ${subtotal.toLocaleString()}`;
+    }
+
+    function openCheckoutFromCart() {
+      toggleCartDrawer(false);
+      buyNowDirectItem = null;
+      openCheckoutModal();
+    }
+
+    function openCheckoutModal() {
+      const products = getProducts();
+      let items = [];
+
+      if (buyNowDirectItem) {
+        items = [{
+          product: buyNowDirectItem.product,
+          quantity: buyNowDirectItem.quantity,
+          subtotal: buyNowDirectItem.product.price * buyNowDirectItem.quantity
+        }];
+      } else {
+        const cart = getCart();
+        if (cart.length === 0) {
+          showToast("Your cart is empty.");
+          return;
+        }
+        items = cart.map(it => {
+          const prod = products.find(p => p.id === it.productId);
+          return {
+            product: prod,
+            quantity: it.quantity,
+            subtotal: prod ? prod.price * it.quantity : 0
+          };
+        }).filter(x => x.product);
+      }
+
+      renderCheckoutSummary(items);
+      selectPaymentMethod('Cash on Delivery');
+      document.getElementById("checkoutModal").classList.add("open");
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById("checkoutModal").classList.remove("open");
+    }
+
+    function renderCheckoutSummary(items) {
+      const listEl = document.getElementById("checkoutItemsList");
+      let subtotal = 0;
+
+      listEl.innerHTML = items.map(it => {
+        subtotal += it.subtotal;
+        const img = it.product.images && it.product.images.length > 0 ? it.product.images[0] : '';
+        return `
+          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px; font-size: 12px;">
+            <img src="${img}" style="width: 44px; height: 44px; object-fit: cover; border: 1px solid var(--border-grey); border-radius: 2px;">
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">${it.product.name}</div>
+              <div style="color: var(--text-muted); font-size: 11px;">Qty: ${it.quantity} × Rs. ${it.product.price.toLocaleString()}</div>
+            </div>
+            <div style="font-weight: 700;">Rs. ${it.subtotal.toLocaleString()}</div>
+          </div>
+        `;
+      }).join('');
+
+      const delivery = selectedPayment === "Cash on Delivery" ? 150 : 0;
+      const grandTotal = subtotal + delivery;
+
+      document.getElementById("checkoutSubtotal").textContent = `Rs. ${subtotal.toLocaleString()}`;
+      document.getElementById("checkoutDelivery").textContent = delivery === 0 ? "FREE (Advance)" : "Rs. 150 (COD)";
+      document.getElementById("checkoutGrandTotal").textContent = `Rs. ${grandTotal.toLocaleString()}`;
+      document.getElementById("placeOrderBtn").textContent = `Confirm & Place Order (Rs. ${grandTotal.toLocaleString()})`;
+    }
+
+    function selectPaymentMethod(method) {
+      selectedPayment = method;
+
+      document.querySelectorAll(".payment-option-card").forEach(c => c.classList.remove("selected"));
+      document.getElementById("detailsJazz").style.display = "none";
+      document.getElementById("detailsEasy").style.display = "none";
+      document.getElementById("detailsUBL").style.display = "none";
+
+      const refGroup = document.getElementById("paymentRefGroup");
+      const proofGroup = document.getElementById("paymentProofGroup");
+
+      if (method === "Cash on Delivery") {
+        document.getElementById("optCOD").classList.add("selected");
+        refGroup.style.display = "none";
+        proofGroup.style.display = "none";
+      } else if (method === "JazzCash") {
+        document.getElementById("optJazz").classList.add("selected");
+        document.getElementById("detailsJazz").style.display = "block";
+        refGroup.style.display = "block";
+        proofGroup.style.display = "block";
+      } else if (method === "Easypaisa") {
+        document.getElementById("optEasy").classList.add("selected");
+        document.getElementById("detailsEasy").style.display = "block";
+        refGroup.style.display = "block";
+        proofGroup.style.display = "block";
+      } else if (method === "UBL Bank Transfer") {
+        document.getElementById("optUBL").classList.add("selected");
+        document.getElementById("detailsUBL").style.display = "block";
+        refGroup.style.display = "block";
+        proofGroup.style.display = "block";
+      }
+
+      const products = getProducts();
+      let items = [];
+      if (buyNowDirectItem) {
+        items = [{
+          product: buyNowDirectItem.product,
+          quantity: buyNowDirectItem.quantity,
+          subtotal: buyNowDirectItem.product.price * buyNowDirectItem.quantity
+        }];
+      } else {
+        const cart = getCart();
+        items = cart.map(it => {
+          const prod = products.find(p => p.id === it.productId);
+          return {
+            product: prod,
+            quantity: it.quantity,
+            subtotal: prod ? prod.price * it.quantity : 0
+          };
+        }).filter(x => x.product);
+      }
+      renderCheckoutSummary(items);
+    }
+
+    function handleProofImage(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          attachedProofBase64 = e.target.result;
+          document.getElementById("proofPreviewImg").src = attachedProofBase64;
+          document.getElementById("proofPreview").style.display = "block";
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function copyText(val, msg) {
+      navigator.clipboard.writeText(val).then(() => {
+        showToast(msg);
+      });
+    }
+
+    function submitOrder() {
+      const name = document.getElementById("custName").value.trim();
+      const whatsapp = document.getElementById("custWhatsapp").value.trim();
+      const altPhone = document.getElementById("custAltPhone").value.trim();
+      const province = document.getElementById("custProvince").value;
+      const city = document.getElementById("custCity").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      const landmark = document.getElementById("custLandmark").value.trim();
+      const ref = document.getElementById("custPaymentRef").value.trim();
+
+      if (!name) return alert("Please enter your full name.");
+      if (!whatsapp) return alert("Please enter your WhatsApp contact number.");
+      if (!city) return alert("Please enter your city.");
+      if (!address) return alert("Please provide your delivery address.");
+
+      if (selectedPayment !== "Cash on Delivery" && !ref) {
+        return alert("Please enter your Payment Reference / Transaction ID (TID) for advance verification.");
+      }
+
+      const products = getProducts();
+      let items = [];
+
+      if (buyNowDirectItem) {
+        items = [{
+          productId: buyNowDirectItem.product.id,
+          name: buyNowDirectItem.product.name,
+          price: buyNowDirectItem.product.price,
+          quantity: buyNowDirectItem.quantity,
+          subtotal: buyNowDirectItem.product.price * buyNowDirectItem.quantity
+        }];
+      } else {
+        const cart = getCart();
+        items = cart.map(it => {
+          const prod = products.find(p => p.id === it.productId);
+          return {
+            productId: it.productId,
+            name: prod ? prod.name : 'Item',
+            price: prod ? prod.price : 0,
+            quantity: it.quantity,
+            subtotal: prod ? prod.price * it.quantity : 0
+          };
+        });
+      }
+
+      const subtotal = items.reduce((acc, cur) => acc + cur.subtotal, 0);
+      const deliveryFee = selectedPayment === "Cash on Delivery" ? 150 : 0;
+      const grandTotal = subtotal + deliveryFee;
+
+      const orderNumber = "UNC-" + Math.floor(10000 + Math.random() * 90000);
+      const newOrder = {
+        id: "order_" + Date.now(),
+        orderNumber: orderNumber,
+        customerName: name,
+        whatsapp: whatsapp,
+        altPhone: altPhone,
+        province: province,
+        city: city,
+        address: address,
+        landmark: landmark,
+        paymentMethod: selectedPayment,
+        paymentReference: ref,
+        paymentProof: attachedProofBase64,
+        items: items,
+        subtotal: subtotal,
+        deliveryFee: deliveryFee,
+        grandTotal: grandTotal,
+        status: "Pending",
+        date: new Date().toISOString()
+      };
+
+      const orders = getOrders();
+      orders.unshift(newOrder);
+      saveOrders(orders);
+
+      if (!buyNowDirectItem) {
+        saveCart([]);
+      }
+      buyNowDirectItem = null;
+
+      closeCheckoutModal();
+      showOrderConfirmation(newOrder);
+    }
+
+    function showOrderConfirmation(order) {
+      const container = document.getElementById("orderConfirmView");
+      container.innerHTML = `
+        <div class="check-icon">✓</div>
+        <h2 style="font-family: var(--font-heading); font-size: 26px; margin-bottom: 6px;">Thank You, ${order.customerName}</h2>
+        <div style="font-size: 14px; font-weight: 700; color: var(--gold-accent); letter-spacing: 0.1em; margin-bottom: 16px;">
+          ORDER #${order.orderNumber} CONFIRMED
+        </div>
+        <p style="font-size: 13px; color: var(--text-dark); margin-bottom: 24px; line-height: 1.6;">
+          Your order has been recorded. It will be handcrafted and dispatched to <strong>${order.city}, ${order.province}</strong>.
+        </p>
+
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-grey); padding: 16px; border-radius: 2px; text-align: left; font-size: 12.5px; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span>Payment Method:</span>
+            <strong>${order.paymentMethod}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span>Amount Payable:</span>
+            <strong>Rs. ${order.grandTotal.toLocaleString()}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Initial Status:</span>
+            <span class="status-badge pending">PENDING</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button class="btn-outline-dark" onclick="closeOrderConfirmModal(); openMeModal();">View in Me</button>
+          <button class="btn-primary" onclick="closeOrderConfirmModal();">Continue Shopping</button>
+        </div>
+      `;
+      document.getElementById("orderConfirmModal").classList.add("open");
+    }
+
+    function closeOrderConfirmModal() {
+      document.getElementById("orderConfirmModal").classList.remove("open");
+    }
+
+    function openMeModal() {
+      const orders = getOrders();
+      const container = document.getElementById("meOrdersContainer");
+
+      if (orders.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+            <div style="font-size: 38px; margin-bottom: 10px;">📦</div>
+            <h4 style="font-family: var(--font-heading); font-size: 18px; color: var(--text-charcoal);">No Orders Placed Yet</h4>
+            <p style="font-size: 12.5px; margin-top: 6px;">Your placed orders and their delivery dispatch statuses will be recorded here.</p>
+            <button class="btn-primary" style="margin-top: 16px;" onclick="closeMeModal(); filterCategory('All');">Start Shopping</button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div style="display: flex; flex-direction: column; gap: 14px; max-height: 500px; overflow-y: auto;">
+            ${orders.map(o => `
+              <div style="border: 1px solid var(--border-grey); border-radius: 2px; padding: 16px; background: var(--bg-primary);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <div>
+                    <strong style="font-family: var(--font-heading); font-size: 15px;">Order #${o.orderNumber}</strong>
+                    <div style="font-size: 11px; color: var(--text-muted);">${new Date(o.date).toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                  </div>
+                  <span class="status-badge ${o.status.toLowerCase()}">${o.status}</span>
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-dark); margin-bottom: 10px; line-height: 1.5;">
+                  ${o.items.map(it => `• ${it.name} (Qty: ${it.quantity})`).join('<br>')}
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; border-top: 1px solid var(--border-grey); padding-top: 10px;">
+                  <span style="color: var(--text-muted);">${o.paymentMethod} • ${o.city}</span>
+                  <strong style="font-size: 14px;">Rs. ${o.grandTotal.toLocaleString()}</strong>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      document.getElementById("meModal").classList.add("open");
+    }
+
+    function closeMeModal() {
+      document.getElementById("meModal").classList.remove("open");
+    }
+
+    let isAdminLoggedIn = false;
+
+    function openAdminModal() {
+      if (isAdminLoggedIn) {
+        showAdminDashboard();
+      } else {
+        document.getElementById("adminLoginSection").style.display = "block";
+        document.getElementById("adminDashboardSection").style.display = "none";
+        document.getElementById("adminUser").value = "";
+        document.getElementById("adminPass").value = "";
+        document.getElementById("adminLoginErr").style.display = "none";
+      }
+      document.getElementById("adminModal").classList.add("open");
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").classList.remove("open");
+    }
+
+    function handleAdminLogin() {
+      const u = document.getElementById("adminUser").value.trim();
+      const p = document.getElementById("adminPass").value;
+      const creds = getAdminCredentials();
+
+      if (u === creds.user && p === creds.pass) {
+        isAdminLoggedIn = true;
+        showAdminDashboard();
+      } else {
+        const err = document.getElementById("adminLoginErr");
+        err.textContent = "Invalid administrator username or password.";
+        err.style.display = "block";
+      }
+    }
+
+    function adminLogout() {
+      isAdminLoggedIn = false;
+      document.getElementById("adminLoginSection").style.display = "block";
+      document.getElementById("adminDashboardSection").style.display = "none";
+      showToast("Logged out from Admin");
+    }
+
+    function showAdminDashboard() {
+      document.getElementById("adminLoginSection").style.display = "none";
+      document.getElementById("adminDashboardSection").style.display = "block";
+      renderAdminOverview();
+      renderAdminOrders();
+      renderAdminProducts();
+    }
+
+    function switchAdminTab(tab, btn) {
+      document.querySelectorAll(".admin-tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      document.getElementById("tabOverview").style.display = tab === "overview" ? "block" : "none";
+      document.getElementById("tabOrders").style.display = tab === "orders" ? "block" : "none";
+      document.getElementById("tabProducts").style.display = tab === "products" ? "block" : "none";
+    }
+
+    function renderAdminOverview() {
+      const orders = getOrders();
+      const gross = orders.filter(o => o.status !== "Cancelled").reduce((acc, cur) => acc + cur.grandTotal, 0);
+      const delivered = orders.filter(o => o.status === "Delivered").reduce((acc, cur) => acc + cur.grandTotal, 0);
+      const pending = orders.filter(o => o.status === "Pending").length;
+
+      document.getElementById("statGrossSales").textContent = `Rs. ${gross.toLocaleString()}`;
+      document.getElementById("statOrderCount").textContent = `${orders.length} total orders`;
+      document.getElementById("statPendingCount").textContent = pending;
+      document.getElementById("statDeliveredSales").textContent = `Rs. ${delivered.toLocaleString()}`;
+
+      const methods = {};
+      orders.filter(o => o.status !== "Cancelled").forEach(o => {
+        methods[o.paymentMethod] = (methods[o.paymentMethod] || 0) + o.grandTotal;
+      });
+
+      const breakdownEl = document.getElementById("adminPaymentBreakdown");
+      if (Object.keys(methods).length === 0) {
+        breakdownEl.innerHTML = `<p style="color: var(--text-muted);">No orders recorded yet.</p>`;
+      } else {
+        breakdownEl.innerHTML = Object.entries(methods).map(([k, v]) => `
+          <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+            <span>${k}</span>
+            <strong>Rs. ${v.toLocaleString()}</strong>
+          </div>
+        `).join('');
+      }
+    }
+
+    function renderAdminOrders() {
+      const orders = getOrders();
+      document.getElementById("adminOrdersTabCount").textContent = orders.length;
+      const tbody = document.getElementById("adminOrdersTableBody");
+
+      if (orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px;">No customer orders yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = orders.map(o => `
+        <tr>
+          <td>
+            <strong>#${o.orderNumber}</strong><br>
+            <span style="font-size: 10px; color: var(--text-muted);">${new Date(o.date).toLocaleDateString()}</span>
+          </td>
+          <td>
+            ${o.customerName}<br>
+            <span style="font-size: 11px; color: var(--text-muted);">${o.whatsapp} • ${o.city}</span>
+          </td>
+          <td>
+            ${o.paymentMethod}<br>
+            <span style="font-size: 11px; color: var(--gold-accent);">${o.paymentReference || 'N/A'}</span>
+          </td>
+          <td><strong>Rs. ${o.grandTotal.toLocaleString()}</strong></td>
+          <td><span class="status-badge ${o.status.toLowerCase()}">${o.status}</span></td>
+          <td>
+            <select onchange="updateOrderStatus('${o.id}', this.value)" style="padding: 4px 8px; font-size: 11px; width: auto;">
+              <option value="Pending" ${o.status === "Pending" ? 'selected' : ''}>Pending</option>
+              <option value="Approved" ${o.status === "Approved" ? 'selected' : ''}>Approved</option>
+              <option value="Processing" ${o.status === "Processing" ? 'selected' : ''}>Processing</option>
+              <option value="Shipped" ${o.status === "Shipped" ? 'selected' : ''}>Shipped</option>
+              <option value="Delivered" ${o.status === "Delivered" ? 'selected' : ''}>Delivered</option>
+              <option value="Cancelled" ${o.status === "Cancelled" ? 'selected' : ''}>Cancelled</option>
+            </select>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+      const orders = getOrders();
+      const o = orders.find(x => x.id === orderId);
+      if (o) {
+        o.status = newStatus;
+        saveOrders(orders);
+        renderAdminOverview();
+        renderAdminOrders();
+        showToast(`Order status updated to ${newStatus}`);
+      }
+    }
+
+    function renderAdminProducts() {
+      const products = getProducts();
+      document.getElementById("adminProdTabCount").textContent = products.length;
+      const listEl = document.getElementById("adminProductsList");
+
+      listEl.innerHTML = products.map(p => `
+        <div style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border-grey); padding: 10px 14px; border-radius: 2px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="${p.images && p.images[0] ? p.images[0] : ''}" style="width: 44px; height: 44px; object-fit: cover; border: 1px solid var(--border-grey); border-radius: 2px;">
+            <div>
+              <strong>${p.name}</strong>
+              <div style="font-size: 11.5px; color: var(--text-muted);">${p.category} • Rs. ${p.price.toLocaleString()} • Stock: ${p.stock} units</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-outline-dark" onclick="openProductEditModal('${p.id}')">Edit</button>
+            <button class="btn-outline-dark" style="color: var(--red-status); border-color: var(--red-status);" onclick="deleteProduct('${p.id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    let tempUploadedImages = [];
+    function openProductEditModal(id) {
+      tempUploadedImages = [];
+      const modal = document.getElementById("productEditModal");
+      const title = document.getElementById("productEditModalTitle");
+      const preview = document.getElementById("editImagesPreview");
+      preview.innerHTML = "";
+
+      if (id) {
+        const products = getProducts();
+        const p = products.find(x => x.id === id);
+        if (!p) return;
+        title.textContent = "Edit Product";
+        document.getElementById("editProdId").value = p.id;
+        document.getElementById("editProdName").value = p.name;
+        document.getElementById("editProdCategory").value = p.category;
+        document.getElementById("editProdPrice").value = p.price;
+        document.getElementById("editProdOrigPrice").value = p.originalPrice || "";
+        document.getElementById("editProdStock").value = p.stock;
+        document.getElementById("editProdImages").value = p.images ? p.images.join(', ') : "";
+        document.getElementById("editProdDesc").value = p.description;
+        tempUploadedImages = p.images ? [...p.images] : [];
+        renderImagesPreview();
+      } else {
+        title.textContent = "Add New Product";
+        document.getElementById("editProdId").value = "";
+        document.getElementById("editProdName").value = "";
+        document.getElementById("editProdPrice").value = "";
+        document.getElementById("editProdOrigPrice").value = "";
+        document.getElementById("editProdStock").value = "10";
+        document.getElementById("editProdImages").value = "";
+        document.getElementById("editProdDesc").value = "";
+      }
+      modal.classList.add("open");
+    }
+
+    function closeProductEditModal() {
+      document.getElementById("productEditModal").classList.remove("open");
+    }
+
+    function handleAdminImageUpload(input) {
+      if (input.files) {
+        Array.from(input.files).forEach(file => {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            tempUploadedImages.push(e.target.result);
+            renderImagesPreview();
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+    }
+
+    function renderImagesPreview() {
+      const preview = document.getElementById("editImagesPreview");
+      preview.innerHTML = tempUploadedImages.map((src, idx) => `
+        <div style="position: relative; width: 60px; height: 60px; border: 1px solid var(--border-grey);">
+          <img src="${src}" style="width: 100%; height: 100%; object-fit: cover;">
+          <button onclick="removeTempImage(${idx})" style="position: absolute; top: 0; right: 0; background: rgba(0,0,0,0.7); color: #fff; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center;">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function removeTempImage(idx) {
+      tempUploadedImages.splice(idx, 1);
+      renderImagesPreview();
+    }
+
+    function saveProductFromModal() {
+      const id = document.getElementById("editProdId").value;
+      const name = document.getElementById("editProdName").value.trim();
+      const cat = document.getElementById("editProdCategory").value;
+      const price = parseFloat(document.getElementById("editProdPrice").value);
+      const orig = parseFloat(document.getElementById("editProdOrigPrice").value) || null;
+      const stock = parseInt(document.getElementById("editProdStock").value) || 0;
+      const desc = document.getElementById("editProdDesc").value.trim();
+      const urlsInput = document.getElementById("editProdImages").value.split(',').map(s => s.trim()).filter(Boolean);
+
+      if (!name || isNaN(price)) return alert("Please fill all required product details.");
+
+      const allImages = [...tempUploadedImages, ...urlsInput];
+      if (allImages.length === 0) {
+        allImages.push('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600');
+      }
+
+      const products = getProducts();
+      if (id) {
+        const p = products.find(x => x.id === id);
+        if (p) {
+          p.name = name;
+          p.category = cat;
+          p.price = price;
+          p.originalPrice = orig;
+          p.stock = stock;
+          p.description = desc;
+          p.images = allImages;
+        }
+      } else {
+        products.unshift({
+          id: "prod_" + Date.now(),
+          name: name,
+          category: cat,
+          price: price,
+          originalPrice: orig,
+          stock: stock,
+          description: desc,
+          images: allImages,
+          isAvailable: true,
+          rating: 5.0,
+          reviewsCount: 1,
+          isBestSeller: false,
+          isNewArrival: true
+        });
+      }
+
+      saveProducts(products);
+      renderProducts();
+      renderAdminProducts();
+      closeProductEditModal();
+      showToast("Product catalogue updated successfully");
+    }
+
+    function deleteProduct(id) {
+      if (!confirm("Are you sure you want to delete this product?")) return;
+      let products = getProducts();
+      products = products.filter(x => x.id !== id);
+      saveProducts(products);
+      renderProducts();
+      renderAdminProducts();
+      showToast("Product deleted");
+    }
+
+    function toggleAdminPasswordModal(open = true) {
+      const modal = document.getElementById("changePasswordModal");
+      if (open) {
+        document.getElementById("curAdminPass").value = "";
+        document.getElementById("newAdminUser").value = "";
+        document.getElementById("newAdminPass").value = "";
+        modal.classList.add("open");
+      } else {
+        modal.classList.remove("open");
+      }
+    }
+
+    function saveAdminCredentials() {
+      const cur = document.getElementById("curAdminPass").value;
+      const newUser = document.getElementById("newAdminUser").value.trim();
+      const newPass = document.getElementById("newAdminPass").value;
+      const creds = getAdminCredentials();
+
+      if (cur !== creds.pass) {
+        return alert("Current administrator password is incorrect.");
+      }
+      if (!newPass) {
+        return alert("Please enter a new password.");
+      }
+
+      if (newUser) creds.user = newUser;
+      creds.pass = newPass;
+
+      localStorage.setItem(STORAGE_KEY_ADMIN, JSON.stringify(creds));
+      toggleAdminPasswordModal(false);
+      showToast("Administrator credentials updated successfully");
+    }
+
+    function toggleFaq(el) {
+      const parent = el.parentElement;
+      parent.classList.toggle("open");
+      const span = el.querySelector("span");
+      span.textContent = parent.classList.contains("open") ? "−" : "+";
+    }
+
+    function navigateTo(target) {
+      if (target === "home") {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toastMessage");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderProducts();
+      updateCartBadge();
+    });
+  </script>
+</body>
+</html>
