@@ -1754,11 +1754,11 @@
         
         <div class="form-group" style="text-align: left;">
           <label class="form-label">Username</label>
-          <input type="text" id="adminUser" placeholder="">
+          <input type="email" id="adminUser" placeholder="Admin email" autocomplete="username">
         </div>
         <div class="form-group" style="text-align: left;">
           <label class="form-label">Password</label>
-          <input type="password" id="adminPass" placeholder="">
+          <input type="password" id="adminPass" placeholder="Admin password" autocomplete="current-password">
         </div>
         <div id="adminLoginErr" style="color: var(--red-status); font-size: 12px; margin-bottom: 12px; display: none;"></div>
         
@@ -1926,7 +1926,11 @@
   <!-- Toast Notification Bar -->
   <div class="toast-msg" id="toastMessage">Product added to bag</div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
+    const SUPABASE_URL = "https://kmkqzqgnoevjlpnnmcnx.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Oa6krjOmOEF5cUPey0loBg__STAlioO";
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
     const STORAGE_KEY_PRODUCTS = "unico_products_v1";
     const STORAGE_KEY_ORDERS = "unico_orders_v1";
     const STORAGE_KEY_CART = "unico_cart_v1";
@@ -2042,20 +2046,73 @@
     ];
 
     function getProducts() {
-      const stored = localStorage.getItem(STORAGE_KEY_PRODUCTS);
-      if (!stored) {
-        localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(DEFAULT_PRODUCTS));
-        return DEFAULT_PRODUCTS;
-      }
-      try {
-        return JSON.parse(stored);
-      } catch (e) {
-        return DEFAULT_PRODUCTS;
-      }
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY_PRODUCTS) || "[]"); }
+      catch (e) { return []; }
     }
 
     function saveProducts(prods) {
       localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(prods));
+      // Persist catalogue changes to the shared database; errors are surfaced to the admin.
+      syncProductsToSupabase(prods).catch(err => {
+        console.error("Supabase product save failed", err);
+        showToast("Could not sync products. Check admin login and connection.");
+      });
+    }
+
+    async function syncProductsToSupabase(prods) {
+      const rows = prods.map(p => ({
+        id: String(p.id), name: p.name, category: p.category,
+        price: Number(p.price) || 0, original_price: p.originalPrice ?? p.original_price ?? null,
+        description: p.description || "", images: p.images || [], stock: Number(p.stock) || 0,
+        is_available: p.isAvailable !== false && p.is_available !== false,
+        rating: Number(p.rating) || 5, reviews_count: Number(p.reviewsCount ?? p.reviews_count) || 0,
+        is_best_seller: Boolean(p.isBestSeller ?? p.is_best_seller),
+        is_new_arrival: Boolean(p.isNewArrival ?? p.is_new_arrival)
+      }));
+      if (rows.length) {
+        const { error } = await supabaseClient.from("products").upsert(rows, { onConflict: "id" });
+        if (error) throw error;
+      }
+    }
+
+    function productFromRow(r) {
+      return { id:r.id, name:r.name, category:r.category, price:Number(r.price),
+        originalPrice:r.original_price == null ? null : Number(r.original_price), description:r.description || "",
+        images:Array.isArray(r.images) ? r.images : [], stock:Number(r.stock) || 0,
+        isAvailable:Boolean(r.is_available), rating:Number(r.rating) || 5,
+        reviewsCount:Number(r.reviews_count) || 0, isBestSeller:Boolean(r.is_best_seller),
+        isNewArrival:Boolean(r.is_new_arrival) };
+    }
+
+    async function loadProductsFromSupabase() {
+      const { data, error } = await supabaseClient.from("products").select("*").order("created_at", { ascending: false });
+      if (error) throw error;
+      if (data && data.length) {
+        const products = data.map(productFromRow);
+        localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(products));
+        return products;
+      }
+      // Empty database: show the built-in starter catalogue locally until the admin first saves it.
+      // Public visitors cannot insert products because product writes are admin-only under RLS.
+      localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(DEFAULT_PRODUCTS));
+      return DEFAULT_PRODUCTS;
+    }
+
+    function orderFromRow(r) {
+      return { id:r.id, orderNumber:r.order_number, customerName:r.customer_name, whatsapp:r.whatsapp,
+        altPhone:r.alt_phone || "", province:r.province || "", city:r.city, address:r.address,
+        landmark:r.landmark || "", paymentMethod:r.payment_method, paymentReference:r.payment_reference || "",
+        paymentProof:r.payment_proof || null, items:Array.isArray(r.items) ? r.items : [], subtotal:Number(r.subtotal),
+        deliveryFee:Number(r.delivery_fee), grandTotal:Number(r.grand_total), status:r.status,
+        date:r.created_at };
+    }
+
+    async function loadOrdersFromSupabase() {
+      const { data, error } = await supabaseClient.from("orders").select("*").order("created_at", { ascending: false });
+      if (error) throw error;
+      const orders = (data || []).map(orderFromRow);
+      localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
+      return orders;
     }
 
     function getCart() {
@@ -2069,22 +2126,12 @@
     }
 
     function getOrders() {
-      const stored = localStorage.getItem(STORAGE_KEY_ORDERS);
-      return stored ? JSON.parse(stored) : [];
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY_ORDERS) || "[]"); }
+      catch (e) { return []; }
     }
 
     function saveOrders(orders) {
       localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
-    }
-
-    function getAdminCredentials() {
-      const stored = localStorage.getItem(STORAGE_KEY_ADMIN);
-      if (!stored) {
-        const initial = { user: "abdullahasad", pass: "124211212ahad0011" };
-        localStorage.setItem(STORAGE_KEY_ADMIN, JSON.stringify(initial));
-        return initial;
-      }
-      return JSON.parse(stored);
     }
 
     let currentCategory = "All";
@@ -2559,7 +2606,7 @@
       });
     }
 
-    function submitOrder() {
+    async function submitOrder() {
       const name = document.getElementById("custName").value.trim();
       const whatsapp = document.getElementById("custWhatsapp").value.trim();
       const altPhone = document.getElementById("custAltPhone").value.trim();
@@ -2629,6 +2676,21 @@
         date: new Date().toISOString()
       };
 
+      const orderRow = {
+        id: newOrder.id, order_number: newOrder.orderNumber, customer_name: newOrder.customerName,
+        whatsapp: newOrder.whatsapp, alt_phone: newOrder.altPhone || "", province: newOrder.province || "",
+        city: newOrder.city, address: newOrder.address, landmark: newOrder.landmark || "",
+        payment_method: newOrder.paymentMethod, payment_reference: newOrder.paymentReference || "",
+        payment_proof: newOrder.paymentProof || null, items: newOrder.items,
+        subtotal: newOrder.subtotal, delivery_fee: newOrder.deliveryFee, grand_total: newOrder.grandTotal,
+        status: newOrder.status
+      };
+      const { error: orderError } = await supabaseClient.from("orders").insert(orderRow);
+      if (orderError) {
+        console.error("Order submission failed", orderError);
+        alert("Your order could not be saved. Please check your internet connection and try again. Details: " + orderError.message);
+        return;
+      }
       const orders = getOrders();
       orders.unshift(newOrder);
       saveOrders(orders);
@@ -2745,31 +2807,59 @@
       document.getElementById("adminModal").classList.remove("open");
     }
 
-    function handleAdminLogin() {
-      const u = document.getElementById("adminUser").value.trim();
-      const p = document.getElementById("adminPass").value;
-      const creds = getAdminCredentials();
-
-      if (u === creds.user && p === creds.pass) {
-        isAdminLoggedIn = true;
-        showAdminDashboard();
-      } else {
-        const err = document.getElementById("adminLoginErr");
-        err.textContent = "Invalid administrator username or password.";
+    async function handleAdminLogin() {
+      const email = document.getElementById("adminUser").value.trim();
+      const password = document.getElementById("adminPass").value;
+      const err = document.getElementById("adminLoginErr");
+      err.style.display = "none";
+      if (!email || !password) {
+        err.textContent = "Enter your admin email and password.";
         err.style.display = "block";
+        return;
       }
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (error || !data.user) {
+        err.textContent = "Login failed. Check your email/password and confirm the user exists in Supabase Authentication.";
+        err.style.display = "block";
+        return;
+      }
+      const { data: adminRecord, error: adminError } = await supabaseClient
+        .from("store_admins").select("user_id").eq("user_id", data.user.id).maybeSingle();
+      if (adminError || !adminRecord) {
+        await supabaseClient.auth.signOut();
+        err.textContent = "This account is not authorized as a store admin. Add its user to public.store_admins in SQL Editor.";
+        err.style.display = "block";
+        return;
+      }
+      isAdminLoggedIn = true;
+      showAdminDashboard();
     }
 
-    function adminLogout() {
+    async function adminLogout() {
+      await supabaseClient.auth.signOut();
       isAdminLoggedIn = false;
       document.getElementById("adminLoginSection").style.display = "block";
       document.getElementById("adminDashboardSection").style.display = "none";
       showToast("Logged out from Admin");
     }
 
-    function showAdminDashboard() {
+    async function showAdminDashboard() {
       document.getElementById("adminLoginSection").style.display = "none";
       document.getElementById("adminDashboardSection").style.display = "block";
+      try {
+        const { data: remoteProducts, error: productCheckError } = await supabaseClient.from("products").select("id").limit(1);
+        if (productCheckError) throw productCheckError;
+        if (!remoteProducts || remoteProducts.length === 0) {
+          await syncProductsToSupabase(getProducts().length ? getProducts() : DEFAULT_PRODUCTS);
+        }
+        await loadProductsFromSupabase();
+      } catch (e) {
+        console.error(e);
+        showToast("Could not sync products. Check admin permissions and database policies.");
+      }
+      try { await loadOrdersFromSupabase(); }
+      catch (e) { console.error(e); showToast("Could not load orders from database."); }
+      renderProducts();
       renderAdminOverview();
       renderAdminOrders();
       renderAdminProducts();
@@ -2853,7 +2943,9 @@
       `).join('');
     }
 
-    function updateOrderStatus(orderId, newStatus) {
+    async function updateOrderStatus(orderId, newStatus) {
+      const { error } = await supabaseClient.from("orders").update({ status: newStatus }).eq("id", orderId);
+      if (error) { alert("Could not update order status: " + error.message); return; }
       const orders = getOrders();
       const o = orders.find(x => x.id === orderId);
       if (o) {
@@ -2955,7 +3047,7 @@
       renderImagesPreview();
     }
 
-    function saveProductFromModal() {
+    async function saveProductFromModal() {
       const id = document.getElementById("editProdId").value;
       const name = document.getElementById("editProdName").value.trim();
       const cat = document.getElementById("editProdCategory").value;
@@ -2967,7 +3059,25 @@
 
       if (!name || isNaN(price)) return alert("Please fill all required product details.");
 
-      const allImages = [...tempUploadedImages, ...urlsInput];
+      let allImages = [...tempUploadedImages, ...urlsInput];
+      // Upload locally selected images to the shared public Supabase Storage bucket.
+      try {
+        allImages = await Promise.all(allImages.map(async (src, idx) => {
+          if (!src.startsWith("data:image/")) return src;
+          const response = await fetch(src);
+          const blob = await response.blob();
+          const ext = (blob.type.split("/")[1] || "jpg").replace("jpeg", "jpg");
+          const path = `products/${Date.now()}_${idx}_${Math.random().toString(36).slice(2)}.${ext}`;
+          const { error } = await supabaseClient.storage.from("unico-product-images").upload(path, blob, { contentType: blob.type, upsert: false });
+          if (error) throw error;
+          const { data } = supabaseClient.storage.from("unico-product-images").getPublicUrl(path);
+          return data.publicUrl;
+        }));
+      } catch (e) {
+        console.error("Image upload failed", e);
+        alert("Image upload failed. Make sure you are logged in as admin and the Storage policies are set. " + e.message);
+        return;
+      }
       if (allImages.length === 0) {
         allImages.push('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600');
       }
@@ -3002,15 +3112,23 @@
         });
       }
 
-      saveProducts(products);
-      renderProducts();
-      renderAdminProducts();
-      closeProductEditModal();
-      showToast("Product catalogue updated successfully");
+      try {
+        await syncProductsToSupabase(products);
+        localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(products));
+        renderProducts();
+        renderAdminProducts();
+        closeProductEditModal();
+        showToast("Product catalogue synced successfully");
+      } catch (e) {
+        console.error(e);
+        alert("Could not save product to Supabase: " + e.message);
+      }
     }
 
-    function deleteProduct(id) {
+    async function deleteProduct(id) {
       if (!confirm("Are you sure you want to delete this product?")) return;
+      const { error } = await supabaseClient.from("products").delete().eq("id", id);
+      if (error) return alert("Could not delete product: " + error.message);
       let products = getProducts();
       products = products.filter(x => x.id !== id);
       saveProducts(products);
@@ -3031,25 +3149,17 @@
       }
     }
 
-    function saveAdminCredentials() {
-      const cur = document.getElementById("curAdminPass").value;
-      const newUser = document.getElementById("newAdminUser").value.trim();
+    async function saveAdminCredentials() {
+      const newEmail = document.getElementById("newAdminUser").value.trim();
       const newPass = document.getElementById("newAdminPass").value;
-      const creds = getAdminCredentials();
-
-      if (cur !== creds.pass) {
-        return alert("Current administrator password is incorrect.");
-      }
-      if (!newPass) {
-        return alert("Please enter a new password.");
-      }
-
-      if (newUser) creds.user = newUser;
-      creds.pass = newPass;
-
-      localStorage.setItem(STORAGE_KEY_ADMIN, JSON.stringify(creds));
+      if (!newEmail && !newPass) return alert("Enter a new email or password.");
+      const updates = {};
+      if (newEmail) updates.email = newEmail;
+      if (newPass) updates.password = newPass;
+      const { error } = await supabaseClient.auth.updateUser(updates);
+      if (error) return alert("Could not update admin account: " + error.message);
       toggleAdminPasswordModal(false);
-      showToast("Administrator credentials updated successfully");
+      showToast("Admin account updated. Check your email if confirmation is required.");
     }
 
     function toggleFaq(el) {
@@ -3074,9 +3184,15 @@
       }, 3000);
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
-      renderProducts();
+    window.addEventListener("DOMContentLoaded", async () => {
       updateCartBadge();
+      try {
+        await loadProductsFromSupabase();
+      } catch (e) {
+        console.error("Could not load Supabase products", e);
+        showToast("Could not connect to product database. Check project settings and RLS.");
+      }
+      renderProducts();
     });
   </script>
 </body>
